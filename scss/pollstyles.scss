@@ -1,0 +1,29 @@
+.page-legend{
+    width:100%;
+    .legendItems-poll{
+		font-size:$font-size-sm;
+		margin-right: 15px;
+	    .poll-legend-bar{
+			width:12px;
+			height:12px;
+			margin-top:4px;
+			margin-right:5px;		    
+	    }
+	    .poll-legend-text{
+		    
+	    }
+    }
+ }
+ .poll-chart-label{
+	 text-transform: uppercase;
+	 font-weight: 700;
+	 margin-bottom: 2px;
+	 margin-top:2px;
+	 color:$gray;
+	 .poll-chart-sample{
+		 text-transform: none;
+		 font-weight:400;
+		 margin-left: 15px;
+		 font-size:$font-size-sm;
+	 }
+ }

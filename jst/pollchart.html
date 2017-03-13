@@ -1,0 +1,18 @@
+
+<div class="page-legend d-flex  flex-wrap">
+	<%t.self.legendItemsArray.forEach(function(d,i){ 
+		if (d == t.self.centerCol){return}%>	
+	    <div class="legendItems-poll d-flex flex-row <%if(i == 0){%>flex-last<%}%>">
+	        <div class='poll-legend-bar' style='background-color:<%=t.self.colors[d]%>;'></div>
+	        <div class="poll-legend-text"><%=t.self.columnNames[d]%></div>
+	    </div>		
+	<%})%>
+</div>
+
+
+<%t.data.forEach(function(d){%>
+	<p class="poll-chart-label"><%= d.category%>    <span class="poll-chart-sample">Sample size: <strong><%=t.self.numbFormat(d.sample)%></strong> | Credibility interval: <strong> <%=d.ci%>%</strong></span>
+</p>
+    <div id="<%=t.self.targetDiv%>-<%=d.id%>" class="chart"></div>
+<%})%>
+ 
