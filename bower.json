@@ -10,9 +10,9 @@
   "dependencies": {
     "textures":"1.0.4",    
     "charter-commons": "https://github.com/Matthew-Weber/charter-commons.git#*",
-    "charter-commons": "https://github.com/Matthew-Weber/basic-charter.git#*",
+    "basic-charter": "https://github.com/Matthew-Weber/basic-charter.git#*"
   },   
-  "version": "0.0.1",
+  "version": "0.0.2",
    "ignore": [
     "/.*"
   ]
