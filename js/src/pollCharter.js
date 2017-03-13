@@ -46,7 +46,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 	baseRender: function() {
 		var self = this;
 		
-		self.legendItemsArray = [self.leftBarCol, self.centerCol, self.rightBarCol]
+		self.legendItemsArray = [self.rightBarCol, self.centerCol, self.leftBarCol]
 		if (_.isArray(self.color)){
 			var obj = {}
 			self.legendItemsArray.forEach(function(d,i){
@@ -108,7 +108,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 				return self.xBarPosition(d,i,j);
 			})
 			.attr("x", function(d){
-				if (d.name == viewSelf.rightBarCol){
+				if (d.name == viewSelf.leftBarCol){
 					return self.scales.y(d["y1Total"]) - (self.scales.y(d[viewSelf.moeColumn])/2);					
 				} 
 				return self.scales.y(d["y0Total"]) - (self.scales.y(d[viewSelf.moeColumn])/2);
@@ -137,7 +137,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 				if (d.name == viewSelf.centerCol){
 					return "none"
 				}
-				if (d.name == viewSelf.rightBarCol){
+				if (d.name == viewSelf.leftBarCol){
 					return self.tother.url()
 				}
 				return self.t.url()
@@ -147,7 +147,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 				return self.xBarPosition(d,i,j);
 			})
 			.attr("x", function(d){
-				if (d.name == viewSelf.rightBarCol){
+				if (d.name == viewSelf.leftBarCol){
 					return self.scales.y(d["y1Total"]) - (self.scales.y(d[viewSelf.moeColumn])/2);					
 				} 
 				return self.scales.y(d["y0Total"]) - (self.scales.y(d[viewSelf.moeColumn])/2);
