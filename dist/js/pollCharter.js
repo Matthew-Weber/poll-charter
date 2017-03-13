@@ -11,7 +11,7 @@
 		function print() {
 			__p += __j.call(arguments, '');
 		}
-		__p += '\n<div class="page-legend d-flex  flex-wrap">\n	';
+		__p += '\n<div class="page-legend d-flex  flex-wrap mb-2">\n	';
 		t.self.legendItemsArray.forEach(function (d, i) {
 			if (d == t.self.centerCol) {
 				return;
@@ -26,7 +26,7 @@
 		__p += '\n</div>\n\n\n';
 		t.data.forEach(function (d) {
 			;
-			__p += '\n	<p class="poll-chart-label">' + ((__t = d.category) == null ? '' : __t) + '    <span class="poll-chart-sample">Sample size: <strong>' + ((__t = t.self.numbFormat(d.sample)) == null ? '' : __t) + '</strong> | Credibility interval: <strong> ' + ((__t = d.ci) == null ? '' : __t) + '%</strong></span>\n</p>\n    <div id="' + ((__t = t.self.targetDiv) == null ? '' : __t) + '-' + ((__t = d.id) == null ? '' : __t) + '" class="chart"></div>\n';
+			__p += '\n	<div class="row">		\n		<div class="col-lg-2">\n			<p class="poll-chart-label">' + ((__t = d.category) == null ? '' : __t) + ' </p>\n			<p class="poll-chart-sample">Sample size: <strong>' + ((__t = t.self.numbFormat(d.sample)) == null ? '' : __t) + '</strong> <br>Credibility interval: <strong> ' + ((__t = d.ci) == null ? '' : __t) + '%</strong></p>			\n		</div>\n		<div class="col-lg-10">\n		    <div id="' + ((__t = t.self.targetDiv) == null ? '' : __t) + '-' + ((__t = d.id) == null ? '' : __t) + '" class="chart"></div>\n		</div>\n	</div>\n';
 		});
 		__p += '\n ';
 		return __p;
@@ -149,7 +149,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 		self.targetDiv = self.$el.attr("id");
 		self.$el.html(self.template({ data: self.data, self: self }));
 
-		self.data.forEach(function (d) {
+		self.data.forEach(function (d, i) {
 
 			var chartBlock = {
 				el: "#" + self.targetDiv + "-" + d.id,
@@ -165,7 +165,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 				yScaleMax: function yScaleMax() {
 					return 100;
 				},
-				margin: { top: 0, right: 18, bottom: 15, left: 3 },
+				margin: { top: 5, right: 18, bottom: 15, left: 3 },
 				tipTemplate: self.tipTemplate
 			};
 
@@ -180,6 +180,10 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 			Reuters.Graphics[d.id] = new Reuters.Graphics.BarChart(chartBlock);
 			Reuters.Graphics[d.id].on("renderChart:end", function (evt) {
 				self.addMoe(this);
+
+				if (i != self.data.length - 1) {
+					$("#" + self.targetDiv + "-" + d.id + " .x.axis text").css({ display: "none" });
+				}
 			});
 			Reuters.Graphics[d.id].on("update:start", function (evt) {
 				self.updateMoe(this);

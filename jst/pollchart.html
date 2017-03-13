@@ -1,5 +1,5 @@
 
-<div class="page-legend d-flex  flex-wrap">
+<div class="page-legend d-flex  flex-wrap mb-2">
 	<%t.self.legendItemsArray.forEach(function(d,i){ 
 		if (d == t.self.centerCol){return}%>	
 	    <div class="legendItems-poll d-flex flex-row <%if(i == 0){%>flex-last<%}%>">
@@ -11,8 +11,14 @@
 
 
 <%t.data.forEach(function(d){%>
-	<p class="poll-chart-label"><%= d.category%>    <span class="poll-chart-sample">Sample size: <strong><%=t.self.numbFormat(d.sample)%></strong> | Credibility interval: <strong> <%=d.ci%>%</strong></span>
-</p>
-    <div id="<%=t.self.targetDiv%>-<%=d.id%>" class="chart"></div>
+	<div class="row">		
+		<div class="col-lg-2">
+			<p class="poll-chart-label"><%= d.category%> </p>
+			<p class="poll-chart-sample">Sample size: <strong><%=t.self.numbFormat(d.sample)%></strong> <br>Credibility interval: <strong> <%=d.ci%>%</strong></p>			
+		</div>
+		<div class="col-lg-10">
+		    <div id="<%=t.self.targetDiv%>-<%=d.id%>" class="chart"></div>
+		</div>
+	</div>
 <%})%>
  
