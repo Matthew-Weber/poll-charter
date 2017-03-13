@@ -241,4 +241,34 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 		});
 	}
 });
+
+Reuters.Graphics.pollLineCharter = Backbone.View.extend({
+	initialize: function initialize(opts) {
+		var self = this;
+		this.options = opts;
+
+		// if we are passing in options, use them instead of the defualts.
+		_.each(opts, function (item, key) {
+			self[key] = item;
+		});
+
+		self.baseRender();
+	},
+
+	baseRender: function baseRender() {
+		var self = this;
+
+		self.poll_chart_obj = new Reuters.Graphics.LineChart(self.options);
+
+		self.poll_chart_obj.on("renderChart:end", function (evt) {
+			var self = this;
+			self.area.y0(function (d) {
+				return self.scales.y(d[self.dataType] - parseFloat(d[self.moeColumn]));
+			}).y1(function (d) {
+				return self.scales.y(d[self.dataType] + parseFloat(d[self.moeColumn]));
+			});
+		});
+	}
+
+});
 //# sourceMappingURL=pollCharter.js.map
