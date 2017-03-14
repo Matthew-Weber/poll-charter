@@ -14,7 +14,7 @@
 	<div class="row">		
 		<div class="col-lg-2">
 			<p class="poll-chart-label"><%= d.category%> </p>
-			<p class="poll-chart-sample">Sample size: <strong><%=t.self.numbFormat(d.sample)%></strong> <br>Credibility interval: <strong> <%=d.ci%>%</strong></p>			
+			<p class="poll-chart-sample">Sample size: <strong><%=t.self.numbFormat(d.sample)%></strong> <br class="hidden-md-down">Credibility interval: <strong> <%=d.ci%>%</strong></p>			
 		</div>
 		<div class="col-lg-10">
 		    <div id="<%=t.self.targetDiv%>-<%=d.id%>" class="chart"></div>

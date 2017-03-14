@@ -1,7 +1,7 @@
 Reuters = Reuters || {};
 Reuters.Graphics = Reuters.Graphics || {};
 //the view that constructs a linechart
-Reuters.Graphics.pollCharter = Backbone.View.extend({
+Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 	template:Reuters.Graphics.pollCharter.Template.pollchart,
 	tipTemplate:Reuters.Graphics.pollCharter.Template.polltip,
 	numbFormat: d3.format(",.0f"),
@@ -87,6 +87,7 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 			Reuters.Graphics[d.id] = new Reuters.Graphics.BarChart(chartBlock);				
 			Reuters.Graphics[d.id].on("renderChart:end", function(evt){
 		    	self.addMoe(this);
+		    	self.addNumbers(this)
 		    	
 					    			
 				if (i != self.data.length - 1){
@@ -94,7 +95,8 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 				}
 			})			
 			Reuters.Graphics[d.id].on("update:start", function(evt){
-		    	self.updateMoe(this);		
+		    	self.updateMoe(this);
+		    	self.updateNumbers(this);		
 			})
 							
 			
@@ -102,6 +104,60 @@ Reuters.Graphics.pollCharter = Backbone.View.extend({
 		})
 
 
+	},
+	
+	addNumbers: function(self){
+		var viewSelf = this;
+		self.barChart.selectAll(".poll-bar-label")
+			.data(function(d) {return d.values;})
+			.enter().append("text")
+			.attr("class", "poll-bar-label")
+			.attr(self.widthOrHeight, function(d,i,j){ return self.barWidth(d,i,j); }) 
+			.attr("y", function (d,i,j){				
+				var width = self.barWidth(d,i,j);									  					  				  	
+				return self.xBarPosition(d,i,j) + width / 2 +5;
+			})
+			.attr("x", function(d){ 
+				if (d.name == viewSelf.rightBarCol){
+					return self.width - 5
+				}
+				return 5
+					
+			})
+			.text(function(d){
+				if (d.name == viewSelf.centerCol){
+					return 
+				}				
+				return d[self.dataType] +"%"
+			})
+			.attr("text-anchor", function(d){
+				if (d.name == viewSelf.rightBarCol){
+					return "end"
+				}
+			})
+		
+		
+	},
+	
+	updateNumbers: function(self){
+		var viewSelf = this;	
+
+		self.barChart.selectAll(".poll-bar-label")
+			.transition()
+			.duration(1000)
+			.attr(self.widthOrHeight, function(d,i,j){ return self.barWidth(d,i,j); }) 
+			.attr("y", function (d,i,j){				
+				var width = self.barWidth(d,i,j);									  					  				  	
+				return self.xBarPosition(d,i,j) + width / 2 +5;
+			})
+			.attr("x", function(d){ 
+				if (d.name == viewSelf.rightBarCol){
+					return self.width - 5
+				}
+				return 5
+					
+			})
+		
 	},
 	
 	updateMoe: function (self){
@@ -199,6 +255,92 @@ Reuters.Graphics.pollLineCharter = Backbone.View.extend({
 		    
 		})								
 	},
+	
+//end of view
+});
+
+Reuters.Graphics.pollBarChart = Backbone.View.extend({
+	initialize: function(opts){
+		var self = this;
+		this.options = opts; 		
+		
+		// if we are passing in options, use them instead of the defualts.
+		_.each(opts, function(item, key){
+			self[key] = item;
+		});	
+
+			self.baseRender()					
+
+	},
+
+	baseRender: function() {
+		var self = this;
+		var options = self.options;
+		console.log(Reuters.Graphics.pollCharter)
+		if (!options.tipTemplate){
+			options.tipTemplate = Reuters.Graphics.pollCharter.Template.pollBarTip
+		}
+		self.poll_chart_obj = new Reuters.Graphics.BarChart(self.options);				
+
+
+		self.poll_chart_obj.on("renderChart:end", function(evt){
+		    self.addMoe(this);
+		    
+		})								
+		self.poll_chart_obj.on("update:end", function(evt){
+		    self.updateMoe(this);
+		    
+		})								
+
+	},
+	updateMoe: function (self){
+		var viewSelf = this;
+
+	    self.addMoe
+	    	.transition()
+	    	.duration(1000)
+			.attr("height", function(d,i,j){ return self.barWidth(d,i,j); }) 
+			.attr("y", function (d,i,j){					  					  				  	
+				return self.xBarPosition(d,i,j);
+			})
+			.attr("x", function(d){
+				return self.scales.y(d[self.dataType]) - (self.scales.y(d[viewSelf.moeColumn])/2);
+			})
+			.attr("width", function(d){ 
+				return self.scales.y(d[viewSelf.moeColumn])
+			});		
+
+	},
+
+	addMoe: function (self){
+		var viewSelf = this;
+
+	
+	    
+	    self.addMoe = self.barChart.selectAll(".moebar")
+			.data(function(d) {return d.values;})
+			.enter().append("rect")
+			.attr("class", ".moebar")
+			.style("fill", function(d){ 
+				var strokecolor = d3.rgb(self.colorScale(d.name)).darker(0.8);
+				self.t = textures.lines().size(5).orientation("2/8").stroke(strokecolor);
+
+				
+				self.svg.call(self.t);
+
+				return self.t.url()
+			})
+			.attr("height", function(d,i,j){ return self.barWidth(d,i,j); }) 
+			.attr("y", function (d,i,j){					  					  				  	
+				return self.xBarPosition(d,i,j);
+			})
+			.attr("x", function(d){
+				return self.scales.y(d[self.dataType]) - (self.scales.y(d[viewSelf.moeColumn])/2);
+			})
+			.attr("width", function(d){ 
+				return self.scales.y(d[viewSelf.moeColumn])
+			});		
+	},	
 	
 //end of view
 });

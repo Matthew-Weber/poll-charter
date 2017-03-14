@@ -1,5 +1,6 @@
 .page-legend{
     width:100%;
+	height:auto;     
     .legendItems-poll{
 		font-size:$font-size-sm;
 		margin-right: 15px;
@@ -32,4 +33,10 @@
  }
  .area{
 	 opacity:0.2;
+ }
+ 
+ .poll-bar-label{
+	 fill:white;
+	 font-size: $font-size-sm;
+	 font-weight: 700;
  }
