@@ -128,7 +128,7 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 				if (d.name == viewSelf.centerCol){
 					return 
 				}				
-				return d[self.dataType] +"%"
+				return self.numbFormat(d[self.dataType]) +"%"
 			})
 			.attr("text-anchor", function(d){
 				if (d.name == viewSelf.rightBarCol){
