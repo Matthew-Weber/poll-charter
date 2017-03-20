@@ -1,4 +1,5 @@
-<%if (t.data[0].quarters){%>
+<% var format = d3.format(",.0f");
+if (t.data[0].quarters){%>
 	<div class='dateTip'> <%=t.data[0].quarters%> <%=t.data[0].displayDate%> </div>
 <%}else if (t.data[0].displayDate){%>
 	<div class='dateTip'> <%=t.data[0].displayDate%> </div>
@@ -21,7 +22,7 @@
 			</div>
 	
 		</div>
-		<div class="valueTip">Credibility Interval: <%=d[t.self.moeColumn]%> <br> Sample size: <%=d[t.self.sampleColumn]%></div>
+		<div class="valueTip">Credibility Interval: <%=d[t.self.moeColumn]%> pct. pts.<br> Sample size: <%=format(d[t.self.sampleColumn])%></div>
 <%})%>	
 <%if(t.self.timelineData){
 	var timelineData = t.self.timelineDataGrouped[t.self.timelineDate(t.data[0].date)]

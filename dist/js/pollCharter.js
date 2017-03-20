@@ -12,6 +12,7 @@
 			__p += __j.call(arguments, '');
 		}
 
+		var format = d3.format(",.0f");
 		if (t.data[0].quarters) {
 			;
 			__p += '\n	<div class=\'dateTip\'> ' + ((__t = t.data[0].quarters) == null ? '' : __t) + ' ' + ((__t = t.data[0].displayDate) == null ? '' : __t) + ' </div>\n';
@@ -44,7 +45,7 @@
 				print(t.self.tipNumbFormat(d[t.self.dataType]));
 				__p += '				\n				';
 			};
-			__p += '\n			</div>\n	\n		</div>\n		<div class="valueTip">Credibility Interval: ' + ((__t = d[t.self.moeColumn]) == null ? '' : __t) + ' <br> Sample size: ' + ((__t = d[t.self.sampleColumn]) == null ? '' : __t) + '</div>\n';
+			__p += '\n			</div>\n	\n		</div>\n		<div class="valueTip">Credibility Interval: ' + ((__t = d[t.self.moeColumn]) == null ? '' : __t) + ' pct. pts.<br> Sample size: ' + ((__t = format(d[t.self.sampleColumn])) == null ? '' : __t) + '</div>\n';
 		});
 		__p += '	\n';
 		if (t.self.timelineData) {
@@ -83,7 +84,7 @@
 		__p += '\n</div>\n\n\n';
 		t.data.forEach(function (d) {
 			;
-			__p += '\n	<div class="row">		\n		<div class="col-lg-2">\n			<p class="poll-chart-label">' + ((__t = d.category) == null ? '' : __t) + ' </p>\n			<p class="poll-chart-sample">Sample size: <strong>' + ((__t = t.self.numbFormat(d.sample)) == null ? '' : __t) + '</strong> <br class="hidden-md-down">Credibility interval: <strong> ' + ((__t = d.ci) == null ? '' : __t) + '%</strong></p>			\n		</div>\n		<div class="col-lg-10">\n		    <div id="' + ((__t = t.self.targetDiv) == null ? '' : __t) + '-' + ((__t = d.id) == null ? '' : __t) + '" class="chart"></div>\n		</div>\n	</div>\n';
+			__p += '\n	<div class="row">		\n		<div class="col-lg-2">\n			<p class="poll-chart-label">' + ((__t = d.category) == null ? '' : __t) + ' </p>\n			<p class="poll-chart-sample">Sample size: <strong>' + ((__t = t.self.numbFormat(d.sample)) == null ? '' : __t) + '</strong> <br class="hidden-md-down">Credibility interval: <strong> ' + ((__t = d.ci) == null ? '' : __t) + ' pct. pts.</strong></p>			\n		</div>\n		<div class="col-lg-10">\n		    <div id="' + ((__t = t.self.targetDiv) == null ? '' : __t) + '-' + ((__t = d.id) == null ? '' : __t) + '" class="chart"></div>\n		</div>\n	</div>\n';
 		});
 		__p += '\n ';
 		return __p;
