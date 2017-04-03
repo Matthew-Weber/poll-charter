@@ -312,13 +312,17 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 	addMoe: function addMoe(self) {
 		var viewSelf = this;
 
-		self.t = textures.lines().size(5).orientation("2/8").stroke("#C3C4C6");
-		self.tother = textures.lines().size(5).orientation("6/8").stroke("#C3C4C6");
+		self.t = textures.lines().size(8).orientation("2/8").stroke("#C3C4C6");
+		self.tother = textures.lines().size(8).orientation("6/8").stroke("#C3C4C6");
 
 		self.svg.call(self.t);
 		self.svg.call(self.tother);
 
-		self.addMoe = self.barChart.selectAll(".moebar").data(function (d) {
+		self.moeChart = self.svg.selectAll(".moeChart").data(self.jsonData, function (d) {
+			return d.name;
+		}).enter().append("g").attr("clip-path", "url(#clip" + self.targetDiv + ")").attr("class", "moeChart");
+
+		self.addMoe = self.moeChart.selectAll(".moebar").data(function (d) {
 			return d.values;
 		}).enter().append("rect").attr("class", ".moebar").style("fill", function (d) {
 
@@ -342,6 +346,7 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 			return self.scales.y(d[viewSelf.moeColumn]);
 		});
 	}
+	//end of view
 });
 
 Reuters.Graphics.pollLineCharter = Backbone.View.extend({
