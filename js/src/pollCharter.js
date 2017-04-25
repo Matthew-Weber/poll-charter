@@ -198,7 +198,7 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 
 		self.addMoe = self.moeChart.selectAll(".moebar").data(function (d) {
 			return d.values;
-		}).enter().append("rect").attr("class", ".moebar").style("fill", function (d) {
+		}).enter().append("rect").attr("class", "moebar").style("fill", function (d) {
 
 			if (d.name == viewSelf.centerCol) {
 				return "none";
@@ -322,7 +322,7 @@ Reuters.Graphics.pollBarChart = Backbone.View.extend({
 	    self.addMoe = self.barChart.selectAll(".moebar")
 			.data(function(d) {return d.values;})
 			.enter().append("rect")
-			.attr("class", ".moebar")
+			.attr("class", "moebar")
 			.style("fill", function(d){ 
 				var strokecolor = d3.rgb(self.colorScale(d.name)).darker(0.8);
 				self.t = textures.lines().size(5).orientation("2/8").stroke(strokecolor);
