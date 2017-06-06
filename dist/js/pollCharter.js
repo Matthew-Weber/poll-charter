@@ -301,11 +301,11 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 			return self.xBarPosition(d, i, j);
 		}).attr("x", function (d) {
 			if (d.name == viewSelf.leftBarCol) {
-				return self.scales.y(d["y1Total"]) - self.scales.y(d[viewSelf.moeColumn]) / 2;
+				return self.scales.y(d["y1Total"]) - self.scales.y(d[viewSelf.moeColumn]);
 			}
-			return self.scales.y(d["y0Total"]) - self.scales.y(d[viewSelf.moeColumn]) / 2;
+			return self.scales.y(d["y0Total"]) - self.scales.y(d[viewSelf.moeColumn]);
 		}).attr("width", function (d) {
-			return self.scales.y(d[viewSelf.moeColumn]);
+			return self.scales.y(d[viewSelf.moeColumn] * 2);
 		});
 	},
 
@@ -339,11 +339,11 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 			return self.xBarPosition(d, i, j);
 		}).attr("x", function (d) {
 			if (d.name == viewSelf.leftBarCol) {
-				return self.scales.y(d["y1Total"]) - self.scales.y(d[viewSelf.moeColumn]) / 2;
+				return self.scales.y(d["y1Total"]) - self.scales.y(d[viewSelf.moeColumn]);
 			}
-			return self.scales.y(d["y0Total"]) - self.scales.y(d[viewSelf.moeColumn]) / 2;
+			return self.scales.y(d["y0Total"]) - self.scales.y(d[viewSelf.moeColumn]);
 		}).attr("width", function (d) {
-			return self.scales.y(d[viewSelf.moeColumn]);
+			return self.scales.y(d[viewSelf.moeColumn]) * 2;
 		});
 	}
 	//end of view
