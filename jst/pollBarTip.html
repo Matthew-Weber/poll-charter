@@ -22,7 +22,7 @@ if (t.data[0].quarters){%>
 			</div>
 	
 		</div>
-		<div class="valueTip">Credibility Interval: <%=d[t.self.moeColumn]%> pct. pts.<br> Sample size: <%=format(d[t.self.sampleColumn])%></div>
+		<div class="valueTip"><%=gettext("Credibility Interval:")%> <%=d[t.self.moeColumn]%> <%=gettext("pct. pts.")%><br> <%=gettext("Sample size:")%> <%=format(d[t.self.sampleColumn])%></div>
 <%})%>	
 <%if(t.self.timelineData){
 	var timelineData = t.self.timelineDataGrouped[t.self.timelineDate(t.data[0].date)]

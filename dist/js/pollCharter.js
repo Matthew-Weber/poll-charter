@@ -45,7 +45,7 @@
 				print(t.self.tipNumbFormat(d[t.self.dataType]));
 				__p += '				\n				';
 			};
-			__p += '\n			</div>\n	\n		</div>\n		<div class="valueTip">Credibility Interval: ' + ((__t = d[t.self.moeColumn]) == null ? '' : __t) + ' pct. pts.<br> Sample size: ' + ((__t = format(d[t.self.sampleColumn])) == null ? '' : __t) + '</div>\n';
+			__p += '\n			</div>\n	\n		</div>\n		<div class="valueTip">' + ((__t = "Credibility Interval:") == null ? '' : __t) + ' ' + ((__t = d[t.self.moeColumn]) == null ? '' : __t) + ' ' + ((__t = "pct. pts.") == null ? '' : __t) + '<br> ' + ((__t = "Sample size:") == null ? '' : __t) + ' ' + ((__t = format(d[t.self.sampleColumn])) == null ? '' : __t) + '</div>\n';
 		});
 		__p += '	\n';
 		if (t.self.timelineData) {
@@ -84,7 +84,7 @@
 		__p += '\n</div>\n\n\n';
 		t.data.forEach(function (d) {
 			;
-			__p += '\n	<div class="row">		\n		<div class="col-lg-2">\n			<p class="poll-chart-label">' + ((__t = d.category) == null ? '' : __t) + ' </p>\n			<p class="poll-chart-sample">Sample size: <strong>' + ((__t = t.self.numbFormat(d.sample)) == null ? '' : __t) + '</strong> <br class="hidden-md-down">Credibility interval: <strong> ' + ((__t = d.ci) == null ? '' : __t) + ' pct. pts.</strong></p>			\n		</div>\n		<div class="col-lg-10">\n		    <div id="' + ((__t = t.self.targetDiv) == null ? '' : __t) + '-' + ((__t = d.id) == null ? '' : __t) + '" class="chart"></div>\n		</div>\n	</div>\n';
+			__p += '\n	<div class="row">		\n		<div class="col-lg-2">\n			<p class="poll-chart-label">' + ((__t = d.category) == null ? '' : __t) + ' </p>\n			<p class="poll-chart-sample">' + ((__t = "Sample size:") == null ? '' : __t) + ' <strong>' + ((__t = t.self.numbFormat(d.sample)) == null ? '' : __t) + '</strong> <br class="hidden-md-down">' + ((__t = "Credibility interval:") == null ? '' : __t) + ' <strong> ' + ((__t = d.ci) == null ? '' : __t) + ' ' + ((__t = "pct. pts.") == null ? '' : __t) + '</strong></p>			\n		</div>\n		<div class="col-lg-10">\n		    <div id="' + ((__t = t.self.targetDiv) == null ? '' : __t) + '-' + ((__t = d.id) == null ? '' : __t) + '" class="chart"></div>\n		</div>\n	</div>\n';
 		});
 		__p += '\n ';
 		return __p;
