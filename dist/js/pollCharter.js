@@ -249,6 +249,7 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 				self.updateNumbers(this);
 			});
 		});
+		self.trigger("baseRender:end");
 	},
 
 	addNumbers: function addNumbers(self) {
@@ -375,8 +376,10 @@ Reuters.Graphics.pollLineCharter = Backbone.View.extend({
 				return self.scales.y(d[self.dataType] + parseFloat(d[self.moeColumn]));
 			});
 		});
+		self.trigger("baseRender:end");
 	}
 
+	//end of view
 });
 
 Reuters.Graphics.pollBarChart = Backbone.View.extend({
@@ -407,6 +410,7 @@ Reuters.Graphics.pollBarChart = Backbone.View.extend({
 		self.poll_chart_obj.on("update:end", function (evt) {
 			self.updateMoe(this);
 		});
+		self.trigger("baseRender:end");
 	},
 	updateMoe: function updateMoe(self) {
 		var viewSelf = this;
@@ -445,5 +449,6 @@ Reuters.Graphics.pollBarChart = Backbone.View.extend({
 		});
 	}
 
+	//end of view
 });
 //# sourceMappingURL=pollCharter.js.map

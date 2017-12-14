@@ -102,7 +102,7 @@ Reuters.Graphics.stackPollCharter = Backbone.View.extend({
 			
 			
 		})
-
+		self.trigger("baseRender:end")
 
 	},
 	
@@ -255,7 +255,8 @@ Reuters.Graphics.pollLineCharter = Backbone.View.extend({
 					
 			     })
 		    
-		})								
+		})
+		self.trigger("baseRender:end")										
 	},
 	
 //end of view
@@ -292,7 +293,8 @@ Reuters.Graphics.pollBarChart = Backbone.View.extend({
 		self.poll_chart_obj.on("update:end", function(evt){
 		    self.updateMoe(this);
 		    
-		})								
+		})	
+		self.trigger("baseRender:end")									
 
 	},
 	updateMoe: function (self){
